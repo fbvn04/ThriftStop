@@ -35,7 +35,7 @@
         </div>
 
         <div class="hidden md:block w-px bg-[#cfc3a5] my-8 shrink-0"></div>
-    
+
         <div class="flex-1 flex flex-col justify-center px-6 md:px-9 py-8">
             <div class="md:hidden mb-5">
                 <h1 class="text-[28px] font-extrabold leading-tight">
@@ -62,13 +62,13 @@
                 @csrf
 
                 <div class="mb-1">
-                    <div id="namaBorder" class="flex items-center border-b border-[#000] transition-colors duration-200">
-                        <i class="fa-regular fa-id-card text-[#000] text-[13px] mr-2 shrink-0"></i>
-                        <input type="text" id="nama" name="nama" placeholder="Nama lengkap pemilik toko"
-                            value="{{ old('nama') }}" autocomplete="name"
+                    <div id="usernameBorder" class="flex items-center border-b border-[#000] transition-colors duration-200">
+                        <i class="fa-regular fa-user text-[#000] text-[13px] mr-2 shrink-0"></i>
+                        <input type="text" id="username" name="username" placeholder="Username (tanpa spasi)"
+                            value="{{ old('username') }}" autocomplete="username"
                             class="flex-1 bg-transparent py-2.5 text-[13px] text-[#000] placeholder-[#aaa] border-none ring-0 focus:ring-0">
                     </div>
-                    <span id="namaError" class="block text-[10px] text-red-500 min-h-[14px] mt-0.5 pl-5"></span>
+                    <span id="usernameError" class="block text-[10px] text-red-500 min-h-[14px] mt-0.5 pl-5"></span>
                 </div>
 
                 <div class="mb-1">
@@ -82,15 +82,15 @@
                 </div>
 
                 <div class="mb-1">
-                    <div id="usernameBorder" class="flex items-center border-b border-[#000] transition-colors duration-200">
-                        <i class="fa-regular fa-user text-[#000] text-[13px] mr-2 shrink-0"></i>
-                        <input type="text" id="username" name="username" placeholder="Username (tanpa spasi)"
-                            value="{{ old('username') }}" autocomplete="username"
+                    <div id="namaBorder" class="flex items-center border-b border-[#000] transition-colors duration-200">
+                        <i class="fa-regular fa-id-card text-[#000] text-[13px] mr-2 shrink-0"></i>
+                        <input type="text" id="nama" name="nama" placeholder="Nama lengkap pemilik toko"
+                            value="{{ old('nama') }}" autocomplete="name"
                             class="flex-1 bg-transparent py-2.5 text-[13px] text-[#000] placeholder-[#aaa] border-none ring-0 focus:ring-0">
                     </div>
-                    <span id="usernameError" class="block text-[10px] text-red-500 min-h-[14px] mt-0.5 pl-5"></span>
+                    <span id="namaError" class="block text-[10px] text-red-500 min-h-[14px] mt-0.5 pl-5"></span>
                 </div>
-             
+
                 <div class="mb-1">
                     <div id="emailBorder" class="flex items-center border-b border-[#000] transition-colors duration-200">
                         <i class="fa-regular fa-envelope text-[#000] text-[13px] mr-2 shrink-0"></i>
@@ -101,7 +101,7 @@
                     <span id="emailError" class="block text-[10px] text-red-500 min-h-[14px] mt-0.5 pl-5"></span>
                 </div>
 
-              
+
                 <div class="mb-1">
                     <div id="hpBorder" class="flex items-center border-b border-[#000] transition-colors duration-200">
                         <i class="fa-solid fa-phone text-[#000] text-[13px] mr-2 shrink-0"></i>
@@ -112,7 +112,7 @@
                     </div>
                     <span id="hpError" class="block text-[10px] text-red-500 min-h-[14px] mt-0.5 pl-5"></span>
                 </div>
-                
+
                 <div class="mb-1">
                     <div id="passwordBorder" class="flex items-center border-b border-[#000] transition-colors duration-200">
                         <i class="fa-solid fa-lock text-[#000] text-[13px] mr-2 shrink-0"></i>
@@ -123,7 +123,7 @@
                             <i class="fa-regular fa-eye" id="eyeIcon"></i>
                         </button>
                     </div>
-                    
+
                     <div class="flex gap-1 mt-1.5 pl-5">
                         <div class="h-1 flex-1 rounded-full bg-gray-200 overflow-hidden"><div id="bar1" class="h-full w-0 strength-bar rounded-full"></div></div>
                         <div class="h-1 flex-1 rounded-full bg-gray-200 overflow-hidden"><div id="bar2" class="h-full w-0 strength-bar rounded-full"></div></div>
@@ -133,7 +133,7 @@
                     <span id="passwordError" class="block text-[10px] text-red-500 min-h-[14px] mt-0.5 pl-5"></span>
                 </div>
 
-                
+
                 <div class="mb-1">
                     <div id="konfirmBorder" class="flex items-center border-b border-[#000] transition-colors duration-200">
                         <i class="fa-solid fa-lock text-[#000] text-[13px] mr-2 shrink-0"></i>

@@ -11,11 +11,13 @@ return new class extends Migration
         Schema::create('tokos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('nama_toko');
+            $table->string('nama_toko')->unique();
             $table->string('foto_toko')->nullable();
             $table->text('deskripsi')->nullable();
-            $table->string('alamat')->nullable();
             $table->string('no_hp')->nullable();
+            $table->foreignId('provinsi_id')->nullable()->constrained('provinsi');
+            $table->foreignId('kota_id')->nullable()->constrained('kota');
+            $table->foreignId('kecamatan_id')->nullable()->constrained('kecamatan');
             $table->timestamps();
         });
     }

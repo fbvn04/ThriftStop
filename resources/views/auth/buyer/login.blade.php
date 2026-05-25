@@ -35,11 +35,11 @@
     </div>
 
     <div class="w-px bg-[#cfc3a5] my-8"></div>
-    
+
     <div class="w-[55%] flex flex-col justify-center px-1 py-1">
         <div class="w-full flex flex-col justify-center px-9 py-10">
             <h2 class="text-[20px] font-semibold text-[#1a1a1a] mb-6">Login</h2>
-  
+
             @if(session('error'))
                 <div class="bg-red-50 text-red-600 px-4 py-2.5 rounded-lg text-[12px] mb-4 flex items-center gap-2">
                     <i class="fa-solid fa-circle-exclamation"></i>
@@ -56,7 +56,7 @@
 
             <form id="loginForm" action="{{ route('login.post') }}" method="POST" novalidate>
                 @csrf
-               
+
                 <div id="usernameBorder" class="flex items-center border-b border-[#000000] mb-1 transition-colors duration-200">
                     <i class="fa-regular fa-user text-[#000000] text-[13px] mr-2 shrink-0"></i>
                     <input
@@ -72,7 +72,7 @@
                 <span id="usernameError" class="block text-[10px] text-red-500 min-h-[14px] mb-3 pl-5">
                     @error('username') {{ $message }} @enderror
                 </span>
-               
+
                 <div id="passwordBorder" class="flex items-center border-b border-[#000000] mb-1 transition-colors duration-200">
                     <i class="fa-solid fa-lock text-[#000000] text-[13px] mr-2 shrink-0"></i>
                     <input
@@ -90,7 +90,7 @@
                 <span id="passwordError" class="block text-[10px] text-red-500 min-h-[14px] mb-3 pl-5">
                     @error('password') {{ $message }} @enderror
                 </span>
-              
+
                 <button
                     type="submit"
                     id="submitBtn"
@@ -100,14 +100,14 @@
                     Login
                 </button>
             </form>
-               
+
                 <p class="text-center text-[11px] text-[#888] mt-4">
                     Belum punya akun?
                     <a href="{{ route('register.buyer') }}" class="text-orange-500 font-semibold hover:underline">
                     Daftar sekarang
                     </a>
                 </p>
-               
+
                 <div class="flex items-center gap-3 mt-5">
                     <div class="flex-1 h-px bg-[#cfc3a5]"></div>
                     <span class="text-[10px] text-[#000000]">atau masuk sebagai</span>
@@ -121,61 +121,75 @@
                 Masuk sebagai Seller
                 </a>
         </div>
+        <script>
+    const form = {
+        username: {
+            input: document.getElementById('username'),
+            border: document.getElementById('usernameBorder'),
+            error: document.getElementById('usernameError'),
+            validate: (v) => {
+                if (!v) return 'Username wajib diisi';
+                if (v.length < 3) return 'Minimal 3 karakter';
+                if (/\s/.test(v)) return 'Tidak boleh ada spasi';
+                return '';
+            }
+        },
 
-    <script>
-        const usernameInput  = document.getElementById('username');
-        const passwordInput  = document.getElementById('password');
-        const usernameError  = document.getElementById('usernameError');
-        const passwordError  = document.getElementById('passwordError');
-        const usernameBorder = document.getElementById('usernameBorder');
-        const passwordBorder = document.getElementById('passwordBorder');
-        const submitBtn      = document.getElementById('submitBtn');
-        const togglePw       = document.getElementById('togglePw');
-        const eyeIcon        = document.getElementById('eyeIcon');
+        password: {
+            input: document.getElementById('password'),
+            border: document.getElementById('passwordBorder'),
+            error: document.getElementById('passwordError'),
+            validate: (v) => {
+                if (!v) return 'Password wajib diisi';
+                if (v.length < 6) return 'Minimal 6 karakter';
+                return '';
+            }
+        }
+    };
 
-        function validateUsername() {
-            const val = usernameInput.value.trim();
-            if (val === '') { setError(usernameBorder, usernameError, 'Username tidak boleh kosong.'); return false; }
-            else if (val.length < 3) { setError(usernameBorder, usernameError, 'Username minimal 3 karakter.'); return false; }
-            else if (/\s/.test(val)) { setError(usernameBorder, usernameError, 'Username tidak boleh mengandung spasi.'); return false; }
-            setValid(usernameBorder, usernameError); return true;
+    const submitBtn = document.getElementById('submitBtn');
+
+    function validateField(field) {
+        const value = field.input.value.trim();
+        const message = field.validate(value);
+
+        field.border.classList.remove('border-red-400', 'border-green-400');
+
+        if (message) {
+            field.border.classList.add('border-red-400');
+            field.error.textContent = message;
+            return false;
         }
 
-        function validatePassword() {
-            const val = passwordInput.value;
-            if (val === '') { setError(passwordBorder, passwordError, 'Password tidak boleh kosong.'); return false; }
-            else if (val.length < 6) { setError(passwordBorder, passwordError, 'Password minimal 6 karakter.'); return false; }
-            setValid(passwordBorder, passwordError); return true;
-        }
+        field.border.classList.add('border-green-400');
+        field.error.textContent = '';
+        return true;
+    }
 
-        function setError(border, msgEl, msg) {
-            border.classList.remove('border-green-400');
-            border.classList.add('border-red-400');
-            msgEl.textContent = msg;
-        }
+    function validateForm() {
+        const valid = Object.values(form).every(validateField);
+        submitBtn.disabled = !valid;
+    }
 
-        function setValid(border, msgEl) {
-            border.classList.remove('border-red-400');
-            border.classList.add('border-green-400');
-            msgEl.textContent = '';
-        }
+    Object.values(form).forEach(field => {
+        field.input.addEventListener('input', validateForm);
+        field.input.addEventListener('blur', validateForm);
+    });
 
-        function checkForm() {
-            submitBtn.disabled = !(validateUsername() && validatePassword());
-        }
+    // Toggle password
+    document.getElementById('togglePw').addEventListener('click', () => {
+        const password = form.password.input;
+        const icon = document.getElementById('eyeIcon');
 
-        usernameInput.addEventListener('input', checkForm);
-        passwordInput.addEventListener('input', checkForm);
-        usernameInput.addEventListener('blur', checkForm);
-        passwordInput.addEventListener('blur', checkForm);
+        const hidden = password.type === 'password';
 
-        togglePw.addEventListener('click', () => {
-            const isHidden = passwordInput.type === 'password';
-            passwordInput.type = isHidden ? 'text' : 'password';
-            eyeIcon.className  = isHidden ? 'fa-regular fa-eye-slash' : 'fa-regular fa-eye';
-        });
+        password.type = hidden ? 'text' : 'password';
+        icon.className = hidden
+            ? 'fa-regular fa-eye-slash'
+            : 'fa-regular fa-eye';
+    });
 
-        if (usernameInput.value.trim() !== '') checkForm();
+    validateForm();
     </script>
 </body>
 </html>

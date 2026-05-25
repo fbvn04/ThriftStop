@@ -43,4 +43,7 @@ class User extends Authenticatable
     {
         return $this->password;
     }
+    public function toko() {
+        return $this->hasOne(Toko::class);
+    }
 }

@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TokoController;
 
 Route::get('/', fn() => view('welcome'));
 
@@ -32,6 +33,9 @@ Route::middleware(['auth'])->prefix('seller')->name('seller.')->group(function (
     Route::put('/produk/{produk}',              [ProductController::class, 'update'])->name('produk.update');
     Route::delete('/produk/{produk}',           [ProductController::class, 'destroy'])->name('produk.destroy');
     Route::delete('/produk/{produk}/permanent', [ProductController::class, 'destroyPermanent'])->name('produk.destroy.permanent');
+
+    Route::post('/toko/edit',      [TokoController::class, 'update'])->name('toko.edit');
+
 });
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

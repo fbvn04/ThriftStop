@@ -13,7 +13,7 @@ class ProductController extends Controller
 {
     private function getToko()
     {
-        return Toko::where('user_id', Auth::id())->firstOrFail();
+        return Toko::where('user_id', Auth::id())->first();
     }
 
     public function index(Request $request)
@@ -61,7 +61,7 @@ class ProductController extends Controller
     }
 
     public function store(Request $request)
-    {   
+    {
         $request->validate([
             'nama_produk'    => 'required|string|max:255',
             'harga'          => 'required|integer|min:0',
@@ -210,5 +210,5 @@ class ProductController extends Controller
     $toko = $this->getToko();
     abort_if($produk->toko_id !== $toko->id, 403);
     return view('seller.edit-produk', compact('toko', 'produk'));
-    }   
+    }
 }

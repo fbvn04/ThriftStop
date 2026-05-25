@@ -37,7 +37,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-        
+
             return match(Auth::user()->role) {
                 'seller' => redirect()->intended(route('seller.dashboard')),
                 default  => redirect()->intended(route('buyer.products.index')),
@@ -54,6 +54,6 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-    return redirect()->route('login.seller');
+        return redirect()->route('login.seller');
     }
 }
