@@ -6,7 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\SellerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TokoController;
-use App\Http\Controllers;
+use App\Http\Controllers\LaporanController;
 
 Route::get('/', fn() => view('welcome'));
 

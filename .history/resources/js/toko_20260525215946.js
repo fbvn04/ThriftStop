@@ -200,7 +200,7 @@ const inputForm = {
         validate: (v) => {
             v = v.replace(/[^a-zA-Z0-9\s]/g, '');
             document.getElementById('namaInput').value = v;
-            if (!v) return 'Nama tidak boleh kosong!';
+            if (!v) return 'Username tidak boleh kosong!';
             if (v.length < 2) return 'Minimal 2 Karakter';
             return '';
         }
@@ -223,8 +223,10 @@ const inputForm = {
             v = v.replace(/[^\d]/g, '');
             v = v.replace(/^0+/, '');
             document.getElementById('phoneInput').value = v;
+
             if (!v) return 'Nomor telephone tidak boleh kosong!';
             if (v.length < 10 || v.length > 13) return 'Nomor telephone tidak sesuai';
+            if (/\s/.test(v)) return 'Username tidak boleh ada spasi';
             if (!/^\d+$/.test(v)) return 'Nomor telephone hanya boleh angka';
             return '';
         }

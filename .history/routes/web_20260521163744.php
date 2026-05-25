@@ -32,4 +32,6 @@ Route::middleware(['auth'])->prefix('seller')->name('seller.')->group(function (
     Route::delete('/produk/{produk}',           [ProductController::class, 'destroy'])->name('produk.destroy');
     Route::delete('/produk/{produk}/permanent', [ProductController::class, 'destroyPermanent'])->name('produk.destroy.permanent');
 
+});
+
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

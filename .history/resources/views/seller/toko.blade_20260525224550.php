@@ -1,4 +1,4 @@
-<x-layout-seller titlePage="Kelola Toko Saya">
+<x-layout-seller titlePage="Seller">
     <form action="{{ route('seller.toko.edit') }}" method="POST" enctype="multipart/form-data" class="px-10 py-1.5 scale-x-100 w-full h-fit bg-white rounded-lg
           md:px-14 md:py-10">
         @if($errors->any())

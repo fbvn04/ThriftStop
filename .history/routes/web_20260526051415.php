@@ -37,7 +37,7 @@ Route::middleware(['auth'])->prefix('seller')->name('seller.')->group(function (
 
     Route::post('/toko/edit',      [TokoController::class, 'update'])->name('toko.edit');
 
-    Route::get('/seller/laporan', [LaporanController::class, 'index'])->name('seller.laporan');
+    Route::get('/seller/laporan', [LaporanControllers::class, 'index'])->name('seller.laporan');
 
 });
 
