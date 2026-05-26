@@ -77,8 +77,7 @@
                             <option value="">Pilih kondisi</option>
                             @foreach(['Seperti Baru', 'Kondisi Baik', 'Kondisi Cukup'] as $kon)
                                 <option value="{{ $kon }}" {{ old('kondisi', $produk->kondisi) === $kon ? 'selected' : '' }}>
-                                    {{ $kon }}
-                                </option>
+                                    {{ $kon }}</option>
                             @endforeach
                         </select>
                     </div>

@@ -7,7 +7,7 @@ use App\Http\Controllers\SellerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TokoController;
 use App\Http\Controllers\LaporanController;
-use App\Http\Controllers\Buyer\HomeController;
+use App\Http\Controllers\HomeController;
 
 Route::get('/', fn() => view('welcome'));
 
@@ -40,11 +40,7 @@ Route::middleware(['auth'])->prefix('seller')->name('seller.')->group(function (
 });
 
 Route::middleware(['auth'])->prefix('buyer')->name('buyer.')->group(function () {
-    Route::get('/home',      [HomeController::class, 'index'])->name('home');
-    Route::get('/shop',      [HomeController::class, 'index'])->name('shop');
-    Route::get('/keranjang', [HomeController::class, 'index'])->name('keranjang');
-    Route::get('/akun',      [HomeController::class, 'index'])->name('akun');
-    Route::get('/produk/{id}', [HomeController::class, 'index'])->name('produk');
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
 });
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
