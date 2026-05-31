@@ -41,10 +41,11 @@ Route::middleware(['auth'])->prefix('seller')->name('seller.')->group(function (
 
 Route::middleware(['auth'])->prefix('buyer')->name('buyer.')->group(function () {
     Route::get('/home',      [HomeController::class, 'index'])->name('home');
-    Route::get('/shop',      [HomeController::class, 'index'])->name('shop');
-    Route::get('/keranjang', [HomeController::class, 'index'])->name('keranjang');
+    Route::get('/shop', [HomeController::class, 'shop'])->name('shop');
+    Route::post('/cart/add/{id}',[HomeController::class,'addToCart'])->name('cart.add');
+    Route::get('/keranjang',[HomeController::class,'cart'])->name('keranjang');
     Route::get('/akun',      [HomeController::class, 'index'])->name('akun');
-    Route::get('/produk/{id}', [HomeController::class, 'index'])->name('produk');
+    Route::get('/produk/{id}', [HomeController::class, 'detailProduk'])->name('produk');
 });
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
