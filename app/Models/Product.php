@@ -31,7 +31,7 @@ class Product extends Model
         'harga'        => 'integer',
         'stok'         => 'integer',
     ];
-   
+
     public function toko()
     {
         return $this->belongsTo(Toko::class, 'toko_id');
@@ -39,15 +39,27 @@ class Product extends Model
 
     public function getLabelStokAttribute(): string
     {
-        if ($this->stok === 0) return 'Habis';
-        if ($this->stok <= 2) return 'Hampir Habis';
+        if ($this->stok === 0) {
+            return 'Habis';
+        }
+
+        if ($this->stok <= 2) {
+            return 'Hampir Habis';
+        }
+
         return 'Tersedia';
     }
 
     public function getWarnaBadgeAttribute(): string
     {
-        if ($this->stok === 0) return 'habis';
-        if ($this->stok <= 2) return 'sedikit';
+        if ($this->stok === 0) {
+            return 'habis';
+        }
+
+        if ($this->stok <= 2) {
+            return 'sedikit';
+        }
+
         return '';
     }
 
