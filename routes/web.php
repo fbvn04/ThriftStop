@@ -45,8 +45,15 @@ Route::middleware(['auth'])->prefix('buyer')->name('buyer.')->group(function () 
     Route::get('/shop', [HomeController::class, 'shop'])->name('shop');
     Route::post('/cart/add/{id}',[HomeController::class,'addToCart'])->name('cart.add');
     Route::get('/keranjang',[HomeController::class,'cart'])->name('keranjang');
-    Route::get('/akun',      [HomeController::class, 'index'])->name('akun');
+    Route::get('/checkout', [HomeController::class, 'checkout'])->name('checkout');
+    Route::get('/akun',[HomeController::class,'akun'])->name('akun');
+    Route::get('/akun/edit', [HomeController::class, 'editProfile'])->name('akun.edit');
+    Route::post('/akun/update',[HomeController::class,'updateAkun'])->name('akun.update');
     Route::get('/produk/{id}', [HomeController::class, 'detailProduk'])->name('produk');
+    Route::post('/cart/increase/{id}', [HomeController::class, 'increaseQty'])->name('cart.increase');
+    Route::post('/cart/decrease/{id}', [HomeController::class, 'decreaseQty'])->name('cart.decrease');
+    Route::get('/profile/edit', [HomeController::class, 'editProfile'])->name('profile.edit');
+    Route::post('/profile/update', [HomeController::class, 'updateProfile'])->name('profile.update');
 });
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

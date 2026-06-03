@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -75,4 +77,90 @@ public function cart()
         'items' => $items,
     ]);
     }
+
+    public function checkout()
+{
+    $user = auth()->user();
+
+    $items = Cart::with('product')
+        ->where('user_id', $user->id)
+        ->get();
+
+    return view('buyer.checkout', compact(
+        'user',
+        'items'
+    ));
+    }
+
+    public function increaseQty($id)
+{
+    $cart = Cart::findOrFail($id);
+
+    $cart->qty += 1;
+    $cart->save();
+
+    return back();
+    }
+
+    public function decreaseQty($id)
+{
+    $cart = Cart::findOrFail($id);
+
+    if ($cart->qty > 1) {
+        $cart->qty -= 1;
+        $cart->save();
+    }
+
+    return back();
+    }
+
+    public function akun()
+{
+    $user = auth()->user();
+
+    return view('buyer.akun', compact('user'));
+    }
+
+    public function editProfile()
+{
+    $user = Auth::user();
+
+    return view('buyer.edit-profile', compact('user'));
+    }
+
+    public function updateProfile(Request $request)
+{
+    $user = Auth::user();
+
+    $request->validate([
+        'name' => 'required',
+        'phone' => 'nullable',
+        'address' => 'nullable',
+        'birth_date' => 'nullable|date',
+        'gender' => 'nullable',
+        'photo' => 'nullable|image|max:2048'
+    ]);
+
+    if ($request->hasFile('photo')) {
+
+        if ($user->photo) {
+            Storage::disk('public')->delete($user->photo);
+        }
+
+        $user->photo = $request->file('photo')
+            ->store('profile', 'public');
+    }
+
+    $user->name = $request->name;
+    $user->phone = $request->phone;
+    $user->address = $request->address;
+    $user->birth_date = $request->birth_date;
+    $user->gender = $request->gender;
+
+    $user->save();
+
+    return redirect()
+        ->route('buyer.akun')
+        ->with('success', 'Profile berhasil diperbarui');
+        }
 }
