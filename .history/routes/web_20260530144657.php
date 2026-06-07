@@ -43,7 +43,7 @@ Route::middleware(['auth'])->prefix('buyer')->name('buyer.')->group(function () 
     Route::get('/home',      [HomeController::class, 'index'])->name('home');
     Route::get('/shop',      [HomeController::class, 'index'])->name('shop');
     Route::get('/keranjang', [HomeController::class, 'index'])->name('keranjang');
-    Route::get('/akun', fn() => view('buyer.akun'))->name('akun');
+    Route::get('/akun',      [HomeController::class, 'index'])->name('akun');
     Route::get('/produk/{id}', [HomeController::class, 'index'])->name('produk');
 });
 

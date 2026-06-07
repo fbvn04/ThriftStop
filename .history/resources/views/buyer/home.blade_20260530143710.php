@@ -107,7 +107,7 @@
 
             .kategori-section {
                 margin-left: -20px;
-                margin-right: -20px;
+                margin-right: -30px;
                 margin-bottom: 24px;
                 padding: 0 20px;
             }

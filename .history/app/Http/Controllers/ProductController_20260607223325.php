@@ -77,7 +77,7 @@ class ProductController extends Controller
     {
         $toko = $this->getToko();
 
-        // Blok kalau profil belum lengkap
+        // Blok store kalau toko belum lengkap
         if (!$this->isTokoLengkap($toko)) {
             return redirect()->route('seller.produk')
                 ->with('error', 'Lengkapi profil toko terlebih dahulu.');
@@ -91,13 +91,22 @@ class ProductController extends Controller
             'kondisi'        => 'nullable|string|max:100',
             'ukuran'         => 'nullable|string|max:100',
             'deskripsi'      => 'nullable|string',
-            'foto'           => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
+            'foto_utama'     => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
+            'foto_lainnya'   => 'nullable|array',
+            'foto_lainnya.*' => 'image|mimes:jpg,jpeg,png,webp|max:5120',
         ]);
 
-        $foto = null;
-        if ($request->hasFile('foto')) {
-            $foto = $request->file('foto')
+        $fotoUtama = null;
+        if ($request->hasFile('foto_utama')) {
+            $fotoUtama = $request->file('foto_utama')
                 ->store('produk/' . $toko->id, 'public');
+        }
+
+        $fotoLainnya = [];
+        if ($request->hasFile('foto_lainnya')) {
+            foreach ($request->file('foto_lainnya') as $foto) {
+                $fotoLainnya[] = $foto->store('produk/' . $toko->id, 'public');
+            }
         }
 
         Produk::create([
@@ -109,7 +118,8 @@ class ProductController extends Controller
             'kategori'     => $request->kategori,
             'kondisi'      => $request->kondisi,
             'ukuran'       => $request->ukuran,
-            'foto'         => $foto,
+            'foto_utama'   => $fotoUtama,
+            'foto_lainnya' => $fotoLainnya ?: null,
             'is_aktif'     => true,
         ]);
 
@@ -131,9 +141,12 @@ class ProductController extends Controller
             'kategori'     => $produk->kategori,
             'kondisi'      => $produk->kondisi,
             'ukuran'       => $produk->ukuran,
-            'foto'         => $produk->foto
-                ? Storage::url($produk->foto)
+            'foto_utama'   => $produk->foto_utama
+                ? Storage::url($produk->foto_utama)
                 : null,
+            'foto_lainnya' => collect($produk->foto_lainnya ?? [])
+                ->map(fn($f) => Storage::url($f))
+                ->values(),
         ]);
     }
 
@@ -150,14 +163,14 @@ class ProductController extends Controller
             'kondisi'     => 'nullable|string|max:100',
             'ukuran'      => 'nullable|string|max:100',
             'deskripsi'   => 'nullable|string',
-            'foto'        => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
+            'foto_utama'  => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
         ]);
 
-        if ($request->hasFile('foto')) {
-            if ($produk->foto) {
-                Storage::disk('public')->delete($produk->foto);
+        if ($request->hasFile('foto_utama')) {
+            if ($produk->foto_utama) {
+                Storage::disk('public')->delete($produk->foto_utama);
             }
-            $produk->foto = $request->file('foto')
+            $produk->foto_utama = $request->file('foto_utama')
                 ->store('produk/' . $toko->id, 'public');
         }
 
@@ -169,7 +182,7 @@ class ProductController extends Controller
             'kategori'    => $request->kategori,
             'kondisi'     => $request->kondisi,
             'ukuran'      => $request->ukuran,
-            'foto'        => $produk->foto,
+            'foto_utama'  => $produk->foto_utama,
         ]);
 
         return redirect()->route('seller.produk')
@@ -192,8 +205,11 @@ class ProductController extends Controller
         $toko = $this->getToko();
         abort_if($produk->toko_id !== $toko->id, 403);
 
-        if ($produk->foto) {
-            Storage::disk('public')->delete($produk->foto);
+        if ($produk->foto_utama) {
+            Storage::disk('public')->delete($produk->foto_utama);
+        }
+        foreach ($produk->foto_lainnya ?? [] as $foto) {
+            Storage::disk('public')->delete($foto);
         }
 
         $produk->delete();

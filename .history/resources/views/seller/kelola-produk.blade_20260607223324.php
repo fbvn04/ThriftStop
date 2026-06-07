@@ -778,6 +778,7 @@
 </head>
 
 <body>
+    {{-- ── Overlay profil belum lengkap ── --}}
     @if(!$tokoLengkap)
         <div class="incomplete-overlay">
             <div class="incomplete-card">
@@ -1040,6 +1041,7 @@
         </main>
     </div>
 
+    {{-- Modal Tambah Produk --}}
     <div class="modal-overlay" id="modalTambah" style="display:none;" onclick="closeModalOutside(event)">
         <div class="modal-box" onclick="event.stopPropagation()">
             <div class="modal-header">
@@ -1132,6 +1134,7 @@
         </div>
     </div>
 
+    {{-- Modal Detail Produk --}}
     <div class="modal-overlay" id="modalDetail" style="display:none;" onclick="closeDetailOutside(event)">
         <div class="modal-box" onclick="event.stopPropagation()" style="max-width:480px;">
             <div class="modal-header">
@@ -1147,6 +1150,7 @@
         </div>
     </div>
 
+    {{-- Modal Logout --}}
     <div id="logoutModal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
         <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="cancelLogout()"></div>
         <div class="relative bg-white rounded-2xl shadow-2xl p-6 w-[300px] mx-4 text-center"

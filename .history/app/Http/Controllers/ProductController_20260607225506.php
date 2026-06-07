@@ -94,9 +94,9 @@ class ProductController extends Controller
             'foto'           => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
         ]);
 
-        $foto = null;
+        $fotoUtama = null;
         if ($request->hasFile('foto')) {
-            $foto = $request->file('foto')
+            $fotoUtama = $request->file('foto')
                 ->store('produk/' . $toko->id, 'public');
         }
 

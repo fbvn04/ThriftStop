@@ -1147,6 +1147,7 @@
         </div>
     </div>
 
+    {{-- Modal Logout --}}
     <div id="logoutModal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
         <div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="cancelLogout()"></div>
         <div class="relative bg-white rounded-2xl shadow-2xl p-6 w-[300px] mx-4 text-center"

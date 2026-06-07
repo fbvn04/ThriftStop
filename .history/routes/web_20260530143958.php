@@ -43,8 +43,13 @@ Route::middleware(['auth'])->prefix('buyer')->name('buyer.')->group(function () 
     Route::get('/home',      [HomeController::class, 'index'])->name('home');
     Route::get('/shop',      [HomeController::class, 'index'])->name('shop');
     Route::get('/keranjang', [HomeController::class, 'index'])->name('keranjang');
-    Route::get('/akun', fn() => view('buyer.akun'))->name('akun');
+    Route::get('/akun',      [HomeController::class, 'index'])->name('akun');
     Route::get('/produk/{id}', [HomeController::class, 'index'])->name('produk');
+    Route::put('/akun', [BuyerController::class, 'updateProfil'])->name('akun.update');
+    Route::post('/alamat', [AlamatController::class, 'store'])->name('alamat.store');
+    Route::put('/alamat/{id}/utama', [AlamatController::class, 'jadikanUtama'])->name('alamat.utama');
+    Route::delete('/alamat/{id}', [AlamatController::class, 'hapus'])->name('alamat.hapus');
+    Route::get('/pesanan/{id}', [PesananController::class, 'detail'])->name('pesanan.detail');
 });
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
