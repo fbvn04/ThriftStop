@@ -789,16 +789,16 @@
 
                 <div class="incomplete-checklist">
                     <div class="incomplete-checklist-item">
-                        <span class="check-icon {{ !empty($toko->user->username) ? 'done' : 'undone' }}">
-                            <i class="fa-solid {{ !empty($toko->user->username) ? 'fa-check' : 'fa-xmark' }}"></i>
+                        <span class="check-icon {{ !empty($toko->nama_toko) ? 'done' : 'undone' }}">
+                            <i class="fa-solid {{ !empty($toko->nama_toko) ? 'fa-check' : 'fa-xmark' }}"></i>
                         </span>
-                        <span>Username pemilik toko</span>
+                        <span>Username Pemilik Toko</span>
                     </div>
                     <div class="incomplete-checklist-item">
-                        <span class="check-icon {{ !empty($toko->user->name) ? 'done' : 'undone' }}">
-                            <i class="fa-solid {{ !empty($toko->user->name) ? 'fa-check' : 'fa-xmark' }}"></i>
+                        <span class="check-icon {{ !empty($toko->nama_toko) ? 'done' : 'undone' }}">
+                            <i class="fa-solid {{ !empty($toko->nama_toko) ? 'fa-check' : 'fa-xmark' }}"></i>
                         </span>
-                        <span>Nama pemilik toko</span>
+                        <span>Nama Pemilik toko</span>
                     </div>
                     <div class="incomplete-checklist-item">
                         <span class="check-icon {{ !empty($toko->nama_toko) ? 'done' : 'undone' }}">
@@ -810,13 +810,13 @@
                         <span class="check-icon {{ !empty($toko->user->hp) ? 'done' : 'undone' }}">
                             <i class="fa-solid {{ !empty($toko->user->hp) ? 'fa-check' : 'fa-xmark' }}"></i>
                         </span>
-                        <span>Nomor telephone</span>
+                        <span>Nomor telepon</span>
                     </div>
                     <div class="incomplete-checklist-item">
-                        <span class="check-icon {{ !empty($toko->user->email) ? 'done' : 'undone' }}">
-                            <i class="fa-solid {{ !empty($toko->user->email) ? 'fa-check' : 'fa-xmark' }}"></i>
+                        <span class="check-icon {{ !empty($toko->user->hp) ? 'done' : 'undone' }}">
+                            <i class="fa-solid {{ !empty($toko->user->hp) ? 'fa-check' : 'fa-xmark' }}"></i>
                         </span>
-                        <span>Email bisnis toko</span>
+                        <span>Email Bisnis Toko</span>
                     </div>
                     <div class="incomplete-checklist-item">
                         <span
@@ -827,16 +827,10 @@
                         <span>Alamat toko (provinsi, kota, kecamatan)</span>
                     </div>
                     <div class="incomplete-checklist-item">
-                        <span class="check-icon {{ !empty($toko->deskripsi_toko) ? 'done' : 'undone' }}">
-                            <i class="fa-solid {{ !empty($toko->deskripsi_toko) ? 'fa-check' : 'fa-xmark' }}"></i>
+                        <span class="check-icon {{ !empty($toko->user->hp) ? 'done' : 'undone' }}">
+                            <i class="fa-solid {{ !empty($toko->user->hp) ? 'fa-check' : 'fa-xmark' }}"></i>
                         </span>
-                        <span>Deskripsi toko</span>
-                    </div>
-                    <div class="incomplete-checklist-item">
-                        <span class="check-icon {{ !empty($toko->qr_code) ? 'done' : 'undone' }}">
-                            <i class="fa-solid {{ !empty($toko->qr_code) ? 'fa-check' : 'fa-xmark' }}"></i>
-                        </span>
-                        <span>QR code pembayaran</span>
+                        <span>Nomor telepon</span>
                     </div>
                 </div>
 

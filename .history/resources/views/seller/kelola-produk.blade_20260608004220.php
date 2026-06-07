@@ -838,6 +838,7 @@
                         </span>
                         <span>QR code pembayaran</span>
                     </div>
+
                 </div>
 
                 <a href="{{ route('seller.toko') }}" class="btn-lengkapi">

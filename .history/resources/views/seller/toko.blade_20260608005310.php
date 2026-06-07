@@ -150,46 +150,35 @@
                 <textarea id="deskripsiToko" name="deskripsi_toko" placeholder="Masukkan nama baru toko anda"
                     class="w-full h-40 resize-none overflow-auto rounded-lg border border-gray-300 px-3 py-1 text-sm outline-none transition"></textarea>
             </div>
-            <div>
-                <label class="block pl-1 text-sm font-semibold text-gray-700 mb-2">
-                    QR Code Pembayaran
-                </label>
-                <p class="text-xs text-gray-400 mb-3 pl-1">
-                    Upload foto QR code QRIS/transfer untuk ditampilkan ke pembeli saat checkout.
-                </p>
+        </div>
+        <div>
+            <label class="block pl-1 text-sm font-semibold text-gray-700 mb-2">
+                QR Code Pembayaran
+            </label>
+            <p class="text-xs text-gray-400 mb-3 pl-1">
+                Upload foto QR code QRIS/transfer untuk ditampilkan ke pembeli saat checkout.
+            </p>
 
-                @if($dataToko->qr_code)
-                    <div class="mb-3 flex items-center gap-4">
-                        <img src="{{ asset('storage/' . $dataToko->qr_code) }}"
-                            class="w-32 h-32 object-contain border border-gray-200 rounded-lg p-1">
-                        <span class="text-xs text-gray-500">QR code aktif</span>
-                    </div>
-                @endif
-
-                <div class="flex items-center gap-3">
-                    <input id="qrInput" name="qr_code" type="file" class="hidden" accept="image/*">
-                    <div id="qrPreviewWrap" class="hidden mb-3">
-                        <img id="qrPreview" class="w-32 h-32 object-contain border border-gray-200 rounded-lg p-1">
-                    </div>
-                    <button type="button" onclick="document.getElementById('qrInput').click()"
-                        class="cursor-pointer py-1.5 px-5 rounded-sm bg-[#FF5500]">
-                        <span class="text-white text-xs font-medium">
-                            {{ $dataToko->qr_code ? 'Ganti QR Code' : 'Upload QR Code' }}
-                        </span>
-                    </button>
-                    <span id="qrFileName" class="text-xs text-gray-400"></span>
+            @if($dataToko->qr_code)
+                <div class="mb-3 flex items-center gap-4">
+                    <img src="{{ asset('storage/' . $dataToko->qr_code) }}"
+                        class="w-32 h-32 object-contain border border-gray-200 rounded-lg p-1">
+                    <span class="text-xs text-gray-500">QR code aktif</span>
                 </div>
-            </div>
+            @endif
 
-            <div class="w-full flex justify-center items-center">
-                <button id="submitBtn" type="submit" class="w-full mb-9 flex justify-center items-center gap-x-2.5 py-3 border-2 cursor-pointer transition duration-300 ease-in-out
-                        border-[#FF5500] text-[#FF5500] font-medium rounded-sm md:rounded-lg md:w-3/5 md:mb-2.5
-                        hover:bg-[#FF5500] hover:text-white hover:scale-95">
-                    <span>
-                        <i class="fa-solid fa-user-pen"></i>
+            <div class="flex items-center gap-3">
+                <input id="qrInput" name="qr_code" type="file" class="hidden" accept="image/*">
+                <div id="qrPreviewWrap" class="hidden mb-3">
+                    <img id="qrPreview" class="w-32 h-32 object-contain border border-gray-200 rounded-lg p-1">
+                </div>
+                <button type="button" onclick="document.getElementById('qrInput').click()"
+                    class="cursor-pointer py-1.5 px-5 rounded-sm bg-[#FF5500]">
+                    <span class="text-white text-xs font-medium">
+                        {{ $dataToko->qr_code ? 'Ganti QR Code' : 'Upload QR Code' }}
                     </span>
-                    <span>Perbarui Toko</span>
                 </button>
+                <span id="qrFileName" class="text-xs text-gray-400"></span>
             </div>
         </div>
     </form>

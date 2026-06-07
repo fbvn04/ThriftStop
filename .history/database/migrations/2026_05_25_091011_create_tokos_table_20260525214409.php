@@ -14,7 +14,6 @@ return new class extends Migration
             $table->string('nama_toko')->unique();
             $table->string('foto_toko')->nullable();
             $table->text('deskripsi')->nullable();
-            $table->string('qr_code')->nullable()->after('deskripsi');
             $table->string('no_hp')->nullable();
             $table->foreignId('provinsi_id')->nullable()->constrained('provinsi');
             $table->foreignId('kota_id')->nullable()->constrained('kota');
